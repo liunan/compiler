@@ -17,6 +17,7 @@ compiler.o:compiler.c
 	$(CC) -c compiler.c
 calc3_c.exe:lex.yy.o y.tab.o compiler.o
 	$(CC) lex.yy.o y.tab.o compiler.o -o calc3_c.exe
-	
+clean:
+	rm -f *.o
 
 	
