@@ -1,6 +1,11 @@
 LEX=flex
-a.exe:scanner.o	
-	cc scanner.o
-scanner.o:scanner.l	
-test:a.exe sample.txt
-	./a.exe < sample.txt
+scanner.o:lex.yy.c scanner.l
+	cc -c lex.yy.c -o scanner.o
+lex.yy.c:scanner.l
+	flex scanner.l
+paser:paser.y scanner.o
+	yacc -d paser.y
+	cc -c y.tab.c -o paser.o
+	cc paser.o scanner.o -o paser.exe
+pasert:
+	./paser.exe < ./sample/vardeclare.h
