@@ -3,36 +3,47 @@
 void yyerror(char *s);
 extern int yylineno;
 %}
-%token INTEGER VOID BOOLEAN IDENTIFIER
+%token TYPE IDENTIFIER CONST_VALUE
 %left '*'
 %%
+
+yacc_output:
+	program	{printf("yacc::accepted\n");}
+;
+program:
+	stmt stmts {printf("yacc:program\n");}
+;
+stmts:
+	program | /**/
+;
 stmt:	
-	';' |
-	function |
-	var_declare |
-	/*NULL*/ |
-	stmt |
+	';' |	
+	var_declare ';'|	
 	error ';' |
 	error '}'
 	{printf("stmt received\n");}	
 ;
-
-function:
-type_value '(' param_list ')' ';' {printf("yac:function captured\n");};
-return_type:
-INTEGER | VOID | BOOLEAN | /*NULL*/ {printf("yacc:type caught\n");}
+var_list:	
+	var var_follows {printf("yacc:var_list\n");}
 ;
-param_list:
-	param_list ',' type_value | 
+var_follows:
+	// {printf("yacc:var_follows\n");}|
+	',' var var_follows {printf("yacc:var_follows var\n");}|
+	/*NULL*/
 ;
-type_value:return_type IDENTIFIER | /*NULL*/ {printf("type_value_pair caught\n");}
+var:
+	IDENTIFIER assignment {printf("yacc:var\n");}
+;
+assignment:
+	'=' CONST_VALUE {printf("yacc:assignment\n");} |
+	/**/
 ;
 var_declare:
-	type_value {printf("yacc:var_declare\n");}
+	TYPE var_list {printf("yacc:var_declare\n");}
 ;
 %%
 void yyerror(char *s) {
-    fprintf(stderr, "line %d: %s\n", yylineno, s);
+    fprintf(stderr, "***yacc error:line %d: %s***\n", yylineno, s);
 }
 int main(void) {
     yyparse();
