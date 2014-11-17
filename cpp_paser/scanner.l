@@ -24,7 +24,7 @@ preprocessor #{identifier}
 	return CONST_VALUE;}
 {CONST_FLOAT} {printf("\tlex:CONST_FLOAT [%s]\n",yytext);return CONST_VALUE;}
 {preprocessor} {printf("\tlex:preprocessor symol [%s]\n",yytext);}
-[-()<>=+*/;{}.,:] {
+[-()<>=+*/;{}.,:&] {
 printf("\tlex:operator %c caught\n",*yytext);
 	return *yytext;
 }
