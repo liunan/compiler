@@ -3,7 +3,7 @@
 void yyerror(char *s);
 extern int yylineno;
 %}
-%token TYPE IDENTIFIER CONST_VALUE
+%token TYPE IDENTIFIER CONST_VALUE ENUM CLASS STRUCT UNION
 %left '*'
 %%
 
@@ -16,6 +16,7 @@ stmt:
 	';' |
 	var_declare ';'|	
 	func_declare ';' |
+	enum_specifier ';'|
 	error ';' |
 	error '}'
 	{printf("stmt received\n");}	
@@ -62,6 +63,27 @@ param_list:
 ;
 func_declare:
 	type IDENTIFIER '(' param ')'	{printf("yacc:func_declare\n");}
+;
+
+enum_specifier:
+	enum_header '{' enumerator_list '}' enum_name
+;
+enum_header:
+	ENUM
+;
+
+enum_name:
+	|
+	IDENTIFIER
+;
+
+enumerator_list:
+	IDENTIFIER enumerator_list_follow
+;
+enumerator_list_follow:
+	',' enumerator_list_follow |
+	IDENTIFIER |
+	/**/
 ;
 %%
 void yyerror(char *s) {

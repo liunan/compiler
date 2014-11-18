@@ -43,6 +43,14 @@ int isType(char* szInput)
 		iRet = TYPE;
 	else if(strcmp(szInput,"void") ==0)
 		iRet = TYPE;
+	else if(strcmp(szInput,"enum") == 0)
+		iRet = ENUM;
+	else if(strcmp(szInput,"class") == 0)
+		iRet = CLASS;
+	else if(strcmp(szInput,"struct") == 0)
+		iRet = STRUCT;
+	else if(strcmp(szInput,"union") == 0)
+		iRet = UNION;
 	return iRet;
 }
 

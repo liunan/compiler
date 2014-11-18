@@ -8,4 +8,4 @@ paser:paser.y scanner.o
 	cc -c y.tab.c -o paser.o
 	cc paser.o scanner.o -o paser.exe
 pasert:
-	./paser.exe < ./sample/funcdeclare.h
+	./paser.exe < ./sample/enum.h
