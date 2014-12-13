@@ -1,0 +1,14 @@
+显示用的数据，仅需要支持遍历操作即可，不需要支持对数据的随机访问
+
+/**
+几何体信息表，存储目标所属于的图层
+*/
+create table geom (layer int,id int,type int,data blob)
+
+
+/**
+属性信息表，存储目标所对应的属性
+*/
+create table xxx_layer_metadata (id int,type int,key text)
+create table xxx_layer_attrib_value (id int,value blob)
+

@@ -51,6 +51,10 @@ int isType(char* szInput)
 		iRet = STRUCT;
 	else if(strcmp(szInput,"union") == 0)
 		iRet = UNION;
+	else if((strcmp(szInput,"public") ==0)||
+			(strcmp(szInput,"private") ==0) ||
+			(strcmp(szInput,"protected") ==0))
+		iRet = VISIBLE_MODIFIER;
 	return iRet;
 }
 
