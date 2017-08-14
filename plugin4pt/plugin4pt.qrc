@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/plugin4pt">
+        <file>buoy.svg</file>
+        <file>target.svg</file>
+    </qresource>
+</RCC>
